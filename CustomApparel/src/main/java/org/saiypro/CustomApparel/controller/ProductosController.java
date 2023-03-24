@@ -29,8 +29,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/productos")
 public class ProductosController {
 
-	/*@Value("${CustomApparel.ruta.imagenes}")
-	private String ruta;*/
+	@Value("${CustomApparel.ruta.imagenes}")
+	private String ruta;
 
 	@Autowired
 	private IntServiceProductos serviceProductos;
@@ -71,7 +71,6 @@ public class ProductosController {
 			return "productos/formProducto";
 		}
 		if (!multiPart.isEmpty()) {
-			String ruta = "c:/productos/img-productos/"; // Windows
 			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
 			if (nombreImagen != null) {
 				producto.setImagen(nombreImagen);
