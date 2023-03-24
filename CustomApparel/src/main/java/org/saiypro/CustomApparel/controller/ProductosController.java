@@ -76,7 +76,7 @@ public class ProductosController {
 				producto.setImagen(nombreImagen);
 			}
 		} else {
-			producto.setImagen(ruta);
+			producto.setImagen(producto.getImagen());
 		}
 		if (producto.getId() == null)
 			model2.addFlashAttribute("msg", "Producto Agregado");
