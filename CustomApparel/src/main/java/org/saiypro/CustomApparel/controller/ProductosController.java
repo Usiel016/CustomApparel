@@ -71,6 +71,7 @@ public class ProductosController {
 			return "productos/formProducto";
 		}
 		if (!multiPart.isEmpty()) {
+			System.out.println(ruta + "fnsdkkgsdggsdk");
 			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
 			if (nombreImagen != null) {
 				producto.setImagen(nombreImagen);
