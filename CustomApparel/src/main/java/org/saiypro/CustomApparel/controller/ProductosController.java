@@ -76,6 +76,7 @@ public class ProductosController {
 				producto.setImagen(nombreImagen);
 			}
 		}
+		System.out.println(ruta + "skmgdnhndjafln");
 		System.out.println(producto.getImagen());
 		if (producto.getId() == null)
 			model2.addFlashAttribute("msg", "Producto Agregado");
