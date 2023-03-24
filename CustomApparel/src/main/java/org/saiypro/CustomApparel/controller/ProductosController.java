@@ -67,11 +67,11 @@ public class ProductosController {
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println("Ocurrio un error: " + error.getDefaultMessage());
 			}
-			model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
+			model.addFlashAttribute("categorias", serviceCategorias.obtenerCategorias());
 			return "productos/formProducto";
 		}
 		if (!multiPart.isEmpty()) {
-			String ruta = "c:/empleos/img-vacantes/"; // Windows
+			String ruta = "c:/productos/img-productos/"; // Windows
 			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
 			if (nombreImagen != null) {
 				producto.setImagen(nombreImagen);
