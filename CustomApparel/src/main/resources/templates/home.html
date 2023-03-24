@@ -26,24 +26,27 @@
 						<img th:src="@{/images/{img}(img=${producto.imagen})}"
 							class="card-img-top" width="200px" height="300px">
 					</div>
-					<div
-						class="card-body text-center bg-secondary bg-opacity-25">
+					<div class="card-body text-center bg-secondary bg-opacity-25">
 						<h5 class="card-title pt-2" th:text="${producto.nombre}"></h5>
 						<h6>
-							<strong>Precio:</strong> <span
-								th:text="'$' + ${producto.precio}"></span>
+							<strong>Precio:</strong> <span th:text="'$' + ${producto.precio}"></span>
 						</h6>
 					</div>
 					<div class="card-footer bg-black">
-						<a class="btn btn-secondary my-cart-btn my-cart-b" th:href="@{/productos/detalle(id=${producto.id})}" style="float: left;"><i
-							class="fa-solid fa-eye fa-lg"></i></a> <a
-							class="btn btn-secondary my-cart-btn my-cart-b" style="float: right;"><i
+						<a class="btn btn-secondary my-cart-btn my-cart-b"
+							th:href="@{/productos/detalle(id=${producto.id})}"
+							style="float: left;"><i class="fa-solid fa-eye fa-lg"></i></a> <a
+							class="btn btn-secondary my-cart-btn my-cart-b"
+							style="float: right;"><i
 							class="fa-solid fa-cart-shopping fa-lg"></i></a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
+	<br>
 
 	<footer class="bg-light fixed-bottom"
 		th:insert="~{fragmentos/pie.html::pie}"></footer>
