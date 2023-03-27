@@ -69,20 +69,31 @@ public class ProductosController {
 			model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
 			return "productos/formProducto";
 		}
-		if (!file.isEmpty()) {
-			System.out.println("Holi");
-			String fileName = util.uploadImage(file);
-			if (fileName != null) {
-				System.out.println(fileName);
-				producto.setImagen(fileName);
+		if(producto.getId() == null) {
+			if (!file.isEmpty()) {
+				System.out.println("Holi");
+				String fileName = util.uploadImage(file);
+				if (fileName != null) {
+					System.out.println(fileName);
+					producto.setImagen(fileName);
+					System.out.println(producto.getImagen());
+				}
 			}
-		}
-		if (producto.getId() == null) {
 			model2.addFlashAttribute("msg", "Producto Agregado");
 		} else {
-			Producto p = serviceProductos.buscarPorId(producto.getId());
-			producto.setImagen(p.getImagen());
-			model2.addFlashAttribute("msg", "Producto Modificado");
+			if (!file.isEmpty()) {
+				System.out.println("Holi");
+				String fileName = util.uploadImage(file);
+				if (fileName != null) {
+					System.out.println(fileName);
+					producto.setImagen(fileName);
+					System.out.println(producto.getImagen());
+					model2.addFlashAttribute("msg", "Producto Modificado");
+				}
+			} else {
+				Producto p = serviceProductos.buscarPorId(producto.getId());
+				producto.setImagen(p.getImagen());
+			}
 		}
 		serviceProductos.guardarProducto(producto);
 		return "redirect:/productos/indexPaginado";
