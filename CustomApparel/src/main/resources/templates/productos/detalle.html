@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" th:href="@{/images/logo.jpeg}">
+
+<title>Custom Apparel | Detalles del producto</title>
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/style-nav.css}">
+</head>
+
+<body>
+
+	<header th:insert="~{fragmentos/menu.html::menu}"></header>
+
+	<main role="main">
+		<hr>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<img class="rounded mx-auto d-block"
+						th:src="@{/images/{img}(img=${producto.imagen})}"
+						alt="Generic placeholder image" width="290" height="290">
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<h4 class="card-header text-white bg-dark bg-opacity-75">
+							<strong th:text="${producto.nombre}"></strong>
+						</h4>
+						<div class="card-body">
+							<h5 class="card-title">
+								<strong>Marca: </strong> <span th:text="${producto.marca}"></span>
+								</h4>
+								<h5 class="card-title">
+									<strong>Categoría: </strong> <span
+										th:text="${producto.categoria.nombre}"></span>
+								</h5>
+								<h5 class="card-title">
+									<strong>Costo: </strong><span
+										th:text="'$' + ${producto.precio}"></span>&nbsp;&nbsp;&nbsp; <i
+										th:if="${producto.estatus==1}"
+										class="fa-solid fa-circle text-success"></i>&nbsp;<span
+										th:if="${producto.estatus==1}">En Stock</span> <i
+										th:unless="${producto.estatus==1}"
+										class="fa-solid fa-circle text-danger"></i>&nbsp;<span
+										th:unless="${producto.estatus==1}">Descontinuado</span>
+								</h5>
+								<h5 class="card-text mt-2" th:text="${producto.descripcion}"></h5>
+								<h5 class="card-title">
+									<strong class="pt-2">Tallas: </strong><span
+										th:each="talla:${producto.tallas}"> <lu>
+										<li th:text="${talla}"></li>
+										</lu></span>
+								</h5>
+								<h5 class="card-title">
+									<strong class="pt-2">Colores: </strong><span
+										th:each="color:${producto.colores}"> <lu>
+										<li th:text="${color}"></li>
+										</lu></span>
+								</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</main>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<footer class="fixed-bottom bg-light"
+		th:insert="~{fragmentos/pie.html::pie}"></footer>
+
+	<script th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
