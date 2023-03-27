@@ -8,9 +8,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+@Service
 public class Utileria {
 	
 	@Value("${CustomApparel.ruta.imagenes}")
