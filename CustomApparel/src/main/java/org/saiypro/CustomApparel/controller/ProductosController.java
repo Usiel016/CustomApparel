@@ -70,8 +70,10 @@ public class ProductosController {
 			return "productos/formProducto";
 		}
 		if (!file.isEmpty()) {
+			System.out.println("Holi");
 			String fileName = util.uploadImage(file);
 			if (fileName != null) {
+				System.out.println(fileName);
 				producto.setImagen(fileName);
 			}
 		}

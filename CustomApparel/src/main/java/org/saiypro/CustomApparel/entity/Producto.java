@@ -26,7 +26,7 @@ public class Producto {
 	private List<String> tallas;
 	private String descripcion;
 	private LocalDate fechaIngreso = LocalDate.now();
-	private String imagen = "img0.png";
+	private String imagen = "no-image.png";
 
 	@OneToOne
 	@JoinColumn(name = "idCategoria")
