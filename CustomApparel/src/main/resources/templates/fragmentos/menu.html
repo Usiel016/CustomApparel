@@ -30,6 +30,9 @@
                     <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
                         <a class="nav-link text-white" th:href="@{/perfiles/index}"><b>Perfiles</b></a>
                     </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Cliente')">
+                        <a class="nav-link text-white" th:href="@{/historialOrdenes}"><b>Historial de ordenes</b></a>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-3 text-end" sec:authorize="isAnonymous()">
