@@ -1,7 +1,13 @@
 package org.saiypro.CustomApparel.controller;
 
+import java.util.List;
+
+import org.saiypro.CustomApparel.entity.Cliente;
+import org.saiypro.CustomApparel.entity.Orden;
 import org.saiypro.CustomApparel.entity.Perfil;
 import org.saiypro.CustomApparel.entity.Usuario;
+import org.saiypro.CustomApparel.service.IntServiceClientes;
+import org.saiypro.CustomApparel.service.IntServiceOrdenes;
 import org.saiypro.CustomApparel.service.IntServiceUsuarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +25,12 @@ public class UsuariosController {
 
 	@Autowired
 	public IntServiceUsuarios serviceUsuarios;
+	
+	@Autowired
+	public IntServiceClientes serviceClientes;
+	
+	@Autowired
+	public IntServiceOrdenes serviceOrdenes;
 
 	@GetMapping("/desbloquear")
 	public String desbloquearUsuario(@RequestParam("id") int idUsuario, RedirectAttributes model) {
@@ -40,6 +52,10 @@ public class UsuariosController {
 
 	@GetMapping("/eliminar")
 	public String eliminarUsuario(Usuario usuario, RedirectAttributes model) {
+		Cliente cliente = serviceClientes.buscarPorUsuario(usuario);
+		List<Orden> ordenes = serviceOrdenes.buscarPorUsuario(usuario);
+		serviceOrdenes.eliminarTodasPorUsuario(ordenes);
+		serviceClientes.eliminarPorId(cliente.getId());
 		serviceUsuarios.eliminarPorId(usuario.getId());
 		model.addFlashAttribute("msg", "La información del usuario ha sido eliminada correctamente.");
 		return "redirect:/usuarios/indexPaginado";

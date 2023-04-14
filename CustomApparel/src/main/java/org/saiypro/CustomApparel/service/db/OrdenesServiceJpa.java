@@ -78,4 +78,9 @@ public class OrdenesServiceJpa implements IntServiceOrdenes {
 		return numeroConcatenado;
 	}
 
+	@Override
+	public void eliminarTodasPorUsuario(List<Orden> ordenes) {
+		repoOrdenes.deleteAll(ordenes);
+	}
+
 }

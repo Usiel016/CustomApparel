@@ -16,6 +16,8 @@ public interface IntServiceOrdenes {
 
 	public Orden buscarPorId(Integer idOrden);
 
+	public void eliminarTodasPorUsuario(List<Orden> ordenes);
+
 	public Page<Orden> buscarTodas(Pageable page);
 
 	public String generarNumeroOrden();
