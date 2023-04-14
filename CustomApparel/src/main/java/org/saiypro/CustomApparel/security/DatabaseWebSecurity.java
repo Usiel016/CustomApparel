@@ -30,7 +30,7 @@ public class DatabaseWebSecurity {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests()
 				// Los recursos estáticos no requieren autenticación
-				.requestMatchers("/static/**", "/css/**", "/images/**", "/mdb5/**").permitAll()
+				.requestMatchers("/static/**", "/css/**", "/images/**", "/mdb5/**", "/mdb5/js/**").permitAll()
 				// Las vistas públicas no requieren autenticación
 				.requestMatchers("/", "/busqueda", "/signup", "/registrar", "/login", "/error", "/productos/detalle/**")
 				.permitAll()

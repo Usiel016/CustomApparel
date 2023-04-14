@@ -1,36 +1,37 @@
 <meta charset="UTF-8">
-<nav class="navbar navbar-expand-lg bg-black navbar-dark" th:fragment="menu">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">Custom Apparel</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="-bs-scroll-height: 100px;">
-                <li class="nav-item"><a class="nav-link" th:href="@{/}"><b>Home</b></a></li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
-                    <a class="nav-link" th:href="@{/usuarios/indexPaginado}"><b>Usuarios</b></a>
-                </li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
-                    <a class="nav-link" th:href="@{/empleados/indexPaginado}"><b>Empleados</b></a>
-                </li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente', 'Empleado')">
-                    <a class="nav-link" th:href="@{/clientes/indexPaginado}"><b>Clientes</b></a>
-                </li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente', 'Empleado')"><a class="nav-link"
-                        th:href="@{/productos/indexPaginado}"><b>Productos</b></a></li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente', 'Empleado')"><a class="nav-link"
-                        th:href="@{/categorias/indexPaginado}"><b>Categorías</b></a>
-                </li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
-                    <a class="nav-link" th:href="@{/perfiles/index}"><b>Perfiles</b></a>
-                </li>
-                <li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('Cliente')">
-                    <a class="nav-link" th:href="@{/historialOrdenes}"><b>Historial de ordenes</b></a>
-                </li>
-            </ul>
+<section class="w-100" th:fragment="menu">
+    <nav class="navbar navbar-expand-lg bg-black navbar-dark 100vh">
+        <div class="container-fluid">
+            <button class="navbar-toggler collapsed" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
+                <a class="navbar-brand mt-2 mt-lg-0" th:href="@{/}"> <img th:src="@{/images/logo.jpeg}" height="50"
+                        alt="Custom Apparel Logo" style="border: 2px solid #fff; border-radius: 75%;">
+                </a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link text-white" th:href="@{/}"><b>Home</b></a></li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
+                        <a class="nav-link text-white" th:href="@{/usuarios/indexPaginado}"><b>Usuarios</b></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
+                        <a class="nav-link text-white" th:href="@{/empleados/indexPaginado}"><b>Empleados</b></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente', 'Empleado')">
+                        <a class="nav-link text-white" th:href="@{/clientes/indexPaginado}"><b>Clientes</b></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente', 'Empleado')"><a
+                            class="nav-link text-white" th:href="@{/productos/indexPaginado}"><b>Productos</b></a></li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente', 'Empleado')"><a
+                            class="nav-link text-white" th:href="@{/categorias/indexPaginado}"><b>Categorías</b></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
+                        <a class="nav-link text-white" th:href="@{/perfiles/index}"><b>Perfiles</b></a>
+                    </li>
+                </ul>
+            </div>
             <div class="col-md-3 text-end" sec:authorize="isAnonymous()">
                 <a class="btn btn-primary me-2" th:href="@{/signup}">Registrarse</a>
                 <a class="btn btn-danger me-2" th:href="@{/login}">Ingresar</a>
@@ -41,7 +42,6 @@
                 role="button"> <i class="fas fa-shopping-cart fa-lg text-white"></i>
             </a>
             <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/logout}">Salir</a>
-
         </div>
-    </div>
-</nav>
+    </nav>
+</section>
