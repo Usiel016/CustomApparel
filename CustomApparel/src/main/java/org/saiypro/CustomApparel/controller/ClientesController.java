@@ -37,7 +37,7 @@ public class ClientesController {
 	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/buscar")
-	public String modificarEmpleado(@RequestParam("id") int idCliente, Model model) {
+	public String modificarCliente(@RequestParam("id") int idCliente, Model model) {
 		Cliente cliente = serviceClientes.buscarPorId(idCliente);
 		model.addAttribute("cliente", cliente);
 		return "clientes/formCliente";
@@ -53,7 +53,8 @@ public class ClientesController {
 	}
 
 	@PostMapping("/agregar")
-	public String agregarEmpleado(Cliente cliente, RedirectAttributes model) {
+	public String agregarCliente(Cliente cliente, RedirectAttributes model) {
+		System.out.println(cliente);
 		if (cliente.getId() == null) {
 			Usuario usuario = new Usuario();
 			usuario.setNombre(cliente.getNombre());

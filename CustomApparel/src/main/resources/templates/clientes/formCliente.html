@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" th:href="@{/images/logo.png}">
-    <title>SGP-VADU | Registro de Clientes</title>
+    <link rel="icon" th:href="@{/images/logo.jpeg}">
+    <title>Custom Apparel | Registro de Clientes</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
@@ -33,6 +33,7 @@
                         </div>
                         <div class="row">
                             <input type="hidden" th:field="*{id}">
+                            <input type="hidden" th:field="*{usuario}">
                             <strong class="mb-3 fs-5">Información personal</strong>
                             <div class="col-md-3 mb-3">
                                 <div class="form-outline">
@@ -95,7 +96,7 @@
                                 <div class="form-outline">
                                     <input type="text" class="form-control bg-light" th:field="*{telefono}"
                                         id="telefono" name="telefono" placeholder="Teléfono del cliente" required
-                                        pattern="[0-9]*">
+                                        pattern="[0-9]*" maxlength="10">
                                     <label class="form-label" for="telefono"><strong class="text-danger">*</strong>
                                         Teléfono</label>
                                 </div>
