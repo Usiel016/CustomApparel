@@ -1,6 +1,5 @@
 package org.saiypro.CustomApparel.service.db;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,12 +7,10 @@ import org.saiypro.CustomApparel.entity.Producto;
 import org.saiypro.CustomApparel.repository.ProductosRepository;
 import org.saiypro.CustomApparel.service.IntServiceProductos;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-@Primary
 @Service
 public class ProductosServiceJpa implements IntServiceProductos {
 
@@ -21,19 +18,18 @@ public class ProductosServiceJpa implements IntServiceProductos {
 	private ProductosRepository repoProductos;
 
 	@Override
-	public List<Producto> obtenerEnStock() {
-		List<Producto> productosEnVenta = new LinkedList<>();
-		for (Producto producto : repoProductos.findAll()) {
-			if (producto.getEstatus() == 1) {
-				productosEnVenta.add(producto);
-			}
-		}
-		return productosEnVenta;
+	public List<Producto> obtenerEnVenta() {
+		return repoProductos.findByEstatus(1);
 	}
 
 	@Override
 	public List<Producto> obtenerProductos() {
 		return repoProductos.findAll();
+	}
+
+	@Override
+	public void agregarProducto(Producto producto) {
+		repoProductos.save(producto);
 	}
 
 	@Override
@@ -46,8 +42,18 @@ public class ProductosServiceJpa implements IntServiceProductos {
 	}
 
 	@Override
-	public void guardarProducto(Producto producto) {
-		repoProductos.save(producto);
+	public List<Producto> buscarPorCategoria(Integer idCategoria) {
+		return repoProductos.buscarTodosPorCategoria(idCategoria);
+	}
+
+	@Override
+	public List<Producto> buscarPorDescripcion(String descripcion) {
+		return repoProductos.buscarTodosPorDescripcion(descripcion);
+	}
+
+	@Override
+	public List<Producto> buscarTodasPorDescripcionYCategoria(String descripcion, Integer idCategoria) {
+		return repoProductos.findAllProductosByDescripcionAndCategoria(descripcion, idCategoria);
 	}
 
 	@Override
@@ -56,12 +62,23 @@ public class ProductosServiceJpa implements IntServiceProductos {
 	}
 
 	@Override
-	public Integer contarProductos() {
-		return (int) repoProductos.count();
-	}
-
-	@Override
 	public Page<Producto> buscarTodas(Pageable page) {
 		return repoProductos.findAll(page);
 	}
+
+	@Override
+	public Page<Producto> buscarTodasEnVenta(Pageable page) {
+		return repoProductos.findAllProductosByEstatus(1, page);
+	}
+
+	@Override
+	public Page<Producto> buscarTodasPorCategoria(Integer idCategoria, Pageable page) {
+		return repoProductos.findAllProductosByEstatusAndCategoria(1, idCategoria, page);
+	}
+
+	@Override
+	public Integer contarProductos() {
+		return repoProductos.cantidadProductos();
+	}
+
 }

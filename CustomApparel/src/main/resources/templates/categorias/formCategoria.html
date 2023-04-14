@@ -2,67 +2,63 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" th:href="@{/images/logo.jpeg}">
-<title>Custom Apparel | Creación de Categorías</title>
-<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
-<link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" th:href="@{/images/logo.jpeg}">
+    <title>Custom Apparel | Creación de Categorías</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
-	<header th:insert="~{fragmentos/menu.html::menu}"></header>
+    <header class="sticky-top" th:insert="~{fragmentos/menu.html::menu}"></header>
 
-	<main role="main">
-		<hr>
-		<div class="container">
-			<div class="card">
-				<h4 class="card-header bg-dark bg-opacity-75 text-white">
-					<strong>Datos de la categoría</strong>
-				</h4>
-				<div class="card-body">
-					<form method="post" th:action="@{/categorias/agregar}"
-						th:object="${categoria}">
-						<div class="row">
-							<div class="col-md-15">
-								<div class="form-group">
-									<label for="nombre"><strong
-										class="text-danger">*</strong> Nombre</label> <input type="hidden"
-										th:field="*{id}"> <input type="text"
-										class="form-control mt-2 mb-2 bg-light" th:field="*{nombre}"
-										id="nombre" name="nombre" th:value="${categoria.nombre}"
-										placeholder="Escriba el nombre de la categoria"
-										required="required">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-15">
-								<div class="form-group">
-									<label for="descripcion">Descripción</label>
-									<textarea class="form-control mt-2 bg-light" th:field="*{descripcion}"
-										name="descripcion" id="descripcion" rows="2"
-										th:text="${categoria.descripcion}" placeholder="Escriba una breve descripción de la categoría"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="text-center mt-3">
-							<button type="submit" class="btn bg-black text-white">Guardar</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</main>
+    <main role="main">
+        <hr>
+        <div class="container">
+            <div class="card">
+                <h4 class="card-header bg-dark bg-opacity-75 text-white">
+                    <strong>Datos de la categoría</strong>
+                </h4>
+                <div class="card-body">
+                    <form method="post" th:action="@{/categorias/agregar}" th:object="${categoria}">
+                        <div class="row">
+                            <div class="col-md-15">
+                                <div class="form-group">
+                                    <label for="nombre"><strong class="text-danger">*</strong> Nombre</label> <input
+                                        type="hidden" th:field="*{id}"> <input type="text"
+                                        class="form-control mt-2 mb-2 bg-light" th:field="*{nombre}" id="nombre"
+                                        name="nombre" th:value="${categoria.nombre}"
+                                        placeholder="Escriba el nombre de la categoria" required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-15">
+                                <div class="form-group">
+                                    <label for="descripcion">Descripción</label>
+                                    <textarea class="form-control mt-2 bg-light" th:field="*{descripcion}"
+                                        name="descripcion" id="descripcion" rows="2" th:text="${categoria.descripcion}"
+                                        placeholder="Escriba una breve descripción de la categoría"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn bg-black text-white">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
 
-	<footer class="fixed-bottom bg-light"
-		th:insert="fragmentos/pie.html::pie"></footer>
+    <footer class="fixed-bottom bg-light" th:insert="fragmentos/pie.html::pie"></footer>
 
-	<script th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"
-		crossorigin="anonymous"></script>
-	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
 </body>
 
 </html>

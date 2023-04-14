@@ -3,6 +3,7 @@ package org.saiypro.CustomApparel.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,10 @@ public class Producto {
 	private String marca;
 	private Integer estatus;
 	private Double precio;
+	private Integer stock;
+	@ElementCollection
 	private List<String> colores;
+	@ElementCollection
 	private List<String> tallas;
 	private String descripcion;
 	private LocalDate fechaIngreso = LocalDate.now();
@@ -31,26 +35,6 @@ public class Producto {
 	@OneToOne
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
-
-	public Producto() {
-
-	}
-
-	public Producto(Integer id, String nombre, String marca, Integer estatus, Double precio, List<String> colores,
-			List<String> tallas, String descripcion, LocalDate fechaIngreso, String imagen, Categoria categoria) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.marca = marca;
-		this.estatus = estatus;
-		this.precio = precio;
-		this.colores = colores;
-		this.tallas = tallas;
-		this.descripcion = descripcion;
-		this.fechaIngreso = fechaIngreso;
-		this.imagen = imagen;
-		this.categoria = categoria;
-	}
 
 	public Integer getId() {
 		return id;
@@ -90,6 +74,14 @@ public class Producto {
 
 	public void setPrecio(Double precio) {
 		this.precio = precio;
+	}
+
+	public Integer getStock() {
+		return stock;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
 
 	public List<String> getColores() {
@@ -143,7 +135,9 @@ public class Producto {
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", marca=" + marca + ", estatus=" + estatus + ", precio="
-				+ precio + ", colores=" + colores + ", tallas=" + tallas + ", descripcion=" + descripcion
-				+ ", fechaIngreso=" + fechaIngreso + ", imagen=" + imagen + ", categoria=" + categoria + "]";
+				+ precio + ", stock=" + stock + ", colores=" + colores + ", tallas=" + tallas + ", descripcion="
+				+ descripcion + ", fechaIngreso=" + fechaIngreso + ", imagen=" + imagen + ", categoria=" + categoria
+				+ "]";
 	}
+
 }

@@ -34,9 +34,9 @@ public class ProductosController {
 	@Autowired
 	private IntServiceCategorias serviceCategorias;
 
-    @Autowired
-    private Utileria util;
-    
+	@Autowired
+	private Utileria util;
+
 	@GetMapping("/detalle")
 	public String consultarDetalleVacante(@RequestParam("id") int idProducto, Model model) {
 		Producto producto = serviceProductos.buscarPorId(idProducto);
@@ -69,33 +69,27 @@ public class ProductosController {
 			model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
 			return "productos/formProducto";
 		}
-		if(producto.getId() == null) {
+		if (producto.getId() == null) {
 			if (!file.isEmpty()) {
-				System.out.println("Holi");
 				String fileName = util.uploadImage(file);
 				if (fileName != null) {
-					System.out.println(fileName);
 					producto.setImagen(fileName);
-					System.out.println(producto.getImagen());
 				}
 			}
 			model2.addFlashAttribute("msg", "Producto Agregado");
 		} else {
 			if (!file.isEmpty()) {
-				System.out.println("Holi");
 				String fileName = util.uploadImage(file);
 				if (fileName != null) {
-					System.out.println(fileName);
 					producto.setImagen(fileName);
-					System.out.println(producto.getImagen());
-					model2.addFlashAttribute("msg", "Producto Modificado");
 				}
 			} else {
 				Producto p = serviceProductos.buscarPorId(producto.getId());
 				producto.setImagen(p.getImagen());
 			}
+			model2.addFlashAttribute("msg", "Producto Modificado");
 		}
-		serviceProductos.guardarProducto(producto);
+		serviceProductos.agregarProducto(producto);
 		return "redirect:/productos/indexPaginado";
 	}
 
@@ -110,6 +104,7 @@ public class ProductosController {
 		Page<Producto> productos = serviceProductos.buscarTodas(page);
 		model.addAttribute("productos", productos);
 		model.addAttribute("total", serviceProductos.contarProductos());
+		System.out.println(productos.getContent());
 		return "productos/listaProductos";
 	}
 

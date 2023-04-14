@@ -39,7 +39,7 @@ public class CategoriasController {
 			model.addFlashAttribute("msg", "Categoría Agregada");
 		else
 			model.addFlashAttribute("msg", "Categoría Actualizada");
-		serviceCategorias.guardarCategoria(categoria);
+		serviceCategorias.agregarCategoria(categoria);
 		return "redirect:/categorias/indexPaginado";
 	}
 

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" th:href="@{/images/logo.jpeg}">
+    <title>Custom Apparel | Carrito de compras</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <header th:insert="~{fragmentos/menu.html::menu}"></header>
+
+    <hr>
+    <section class="h-100">
+        <div class="container py-4 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12">
+                    <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                        <div class="card-body p-0">
+                            <div class="row g-0">
+                                <div class="col-lg-8">
+                                    <div class="p-5">
+                                        <div class="d-flex justify-content-between align-items-center mb-5">
+                                            <h1 class="fw-bold mb-0 text-black">Carrito de Compras</h1>
+                                            <h6 class="mb-0 text-muted" th:text="${items} + ' item(s)'"></h6>
+                                        </div>
+                                        <div class="alert alert-success" role="alert" th:if="${msg!=null}">
+                                            <i class="fa-solid fa-circle-check"></i> <strong th:text="${msg}"></strong>
+                                        </div>
+                                        <div class="alert alert-danger" role="alert" th:if="${msg2!=null}">
+                                            <i class="fa-solid fa-triangle-exclamation"></i> <strong
+                                                th:text="${msg2}"></strong>
+                                        </div>
+
+                                        <hr class="my-4">
+
+                                        <div class="row d-flex justify-content-between align-items-center"
+                                            th:each="dorden:${carrito}">
+                                            <div class="col-md-2 col-xl-2 contenedor-imagen">
+                                                <img th:src="@{/images/{img}(img=${dorden.producto.imagen})}"
+                                                    class="img-fluid rounded-3">
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                                <h6 class="text-muted">Producto</h6>
+                                                <h6 class="text-black mb-2" th:text="${dorden.producto.nombre}"></h6>
+                                            </div>
+                                            <div class="col-md-2 col-lg-3 col-xl-2">
+                                                <h6 class="text-muted">Precio Unitario</h6>
+                                                <h6 class="text-black mb-2" th:text="${'$' + dorden.producto.precio}">
+                                                </h6>
+                                            </div>
+                                            <!-- Quantity -->
+                                            <div class="col-md-2 col-lg-3 col-xl-2 d-flex my-2 text-center">
+                                                <form method="post" th:action="@{/carrito/cambiar}">
+                                                    <button
+                                                        th:classappend="${dorden.cantidad == 1 ? 'disabled' : 'enabled'}"
+                                                        class="btn btn-link px-2"
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+
+                                                    <input type="hidden" th:value="${dorden.id}" name="detalleOrden">
+                                                    <input id="form1" min="1" name="cantidad"
+                                                        th:value="${dorden.cantidad}" th:max="${dorden.producto.stock}"
+                                                        type="number" class="form-control form-control-sm" />
+
+                                                    <button
+                                                        th:classappend="${dorden.cantidad == dorden.producto.stock ? 'disabled' : 'enabled'}"
+                                                        class="btn btn-link px-2"
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-2 col-lg-2 col-xl-2">
+                                                <h6 class="text-muted">Total</h6>
+                                                <h6 class="text-black mb-2" th:text="${'$' + dorden.total}">
+                                                </h6>
+                                            </div>
+                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                <a type="button" th:href="@{/carrito/eliminar(id=${dorden.id})}"
+                                                    onclick="return confirm('¿Estas seguro?')" data-mdb-toggle="tooltip"
+                                                    title="Remover item" class="text-muted"><i
+                                                        class="fas fa-times"></i></a>
+                                            </div>
+                                            <hr class="my-4">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 bg-grey">
+                                    <div class="p-5">
+                                        <h3 class="fw-bold mb-5 mt-2 pt-1">Total</h3>
+                                        <hr class="my-4">
+
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <h5 class="text-uppercase" th:text="'Total por ' + ${items} +  ' item(s)'">
+                                            </h5>
+                                            <h5 th:text="'$' + ${orden}"></h5>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <h5 class="text-uppercase">Cobro por 16% iva</h5>
+                                            <h5 th:text="'$' + ${iva}"></h5>
+                                        </div>
+
+                                        <hr class="my-4">
+
+                                        <div class="d-flex justify-content-between mb-5">
+                                            <h5 class="text-uppercase">Precio Total</h5>
+                                            <h5 th:text="'$' + ${totalIva}"></h5>
+                                        </div>
+
+                                        <a th:if="${cliente.calle==null}" th:href="@{/carrito/direccion}" th:classappend="${items == 0 ? 'disabled' : ''}" class="btn btn-dark btn-block btn-lg"
+                                            data-mdb-ripple-color="dark">Ordenar</a>
+                                        <a th:unless="${cliente.calle==null}" th:href="@{/carrito/orden}" th:classappend="${items == 0 ? 'disabled' : ''}" class="btn btn-dark btn-block btn-lg"
+                                            data-mdb-ripple-color="dark">Ordenar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br><br><br>
+
+    <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
+
+    <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+</body>

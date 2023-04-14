@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" th:href="@{/images/logo.jpeg}">
+    <title>Custom Apparel | Historial de Ordenes</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <header class="sticky-top" th:insert="~{fragmentos/menu.html::menu}"></header>
+
+    <section>
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="card border-top border-bottom border-3 mb-4" style="border-color: black !important;"
+                        th:each="orden:${ordenes}">
+                        <div class="card-header text-white bg-dark bg-opacity-75 text-center"><p class="fw-bold fs-3">Detalles de la Orden</p></div>
+                        <div class="card-body p-5 text-black text-center fs-4">
+                            <div class="row">
+                                 <p class="small text-muted mb-1">Fecha de Creación</p>
+                                 <p th:text="${orden.fechaCreacion}"></p>
+                            </div>
+                            <div class="row">
+                                <p class="small text-muted mb-1">Número de Orden</p>
+                                <p th:text="${orden.numero}"></p>
+                            </div>
+                            <div class="row">
+	                            <p class="small text-muted mb-1">Costo de la Orden</p>
+	                            <p class="lead fw-bold mb-0 text-success fs-4" th:text="'$' + ${orden.total}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br><br>
+
+    <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
+
+    <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+</body>
+
+</html>

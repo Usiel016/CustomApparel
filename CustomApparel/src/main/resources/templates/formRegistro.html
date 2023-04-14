@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" th:href="@{/images/logo.jpeg}">
+    <title>Custom Apparel | Formulario de Registro</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+
+    <header th:insert="~{fragmentos/menu.html::menu}"></header>
+
+    <main role="main">
+        <hr>
+        <div class="container">
+            <div class="card">
+                <h4 class="card-header text-white bg-dark bg-opacity-75"><strong>Formulario de registro</strong></h4>
+                <div class="card-body">
+                    <form method="post" th:action="@{/registrar}" th:object="${usuario}">
+                        <div class="row py-2">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="pb-2" for="nombre">Nombre(s)</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}"
+                                        placeholder="Escriba su nombre" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="pb-2" for="apellidoPaterno">Ape. Paterno</label>
+                                    <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" th:field="*{apellidoPaterno}"
+                                        placeholder="Escriba su apellido paterno" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="pb-2" for="apellidoMaterno">Ape. Materno</label>
+                                    <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" th:field="*{apellidoMaterno}"
+                                        placeholder="Escriba su apellido materno" required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="pb-2" for="email">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="email" name="email" th:field="*{email}"
+                                        placeholder="Escriba su correo electrónico" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="pb-2" for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" th:field="*{username}"
+                                        placeholder="Escriba su nombre de usuario" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="pb-2" for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Escriba su clave de acceso" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="pb-2" for="confirmPassword">Confirmación</label>
+                                    <input type="password" class="form-control" id="confirmPassword"
+                                        name="confirmPassword" placeholder="Confirme su clave de acceso"
+                                        required="required">
+                                </div>
+                                <small th:if="${#fields.hasErrors('confirmPassword')}"
+                                	th:errors="*{confirmPassword}" class="form-text text-danger"></small>
+                            </div>
+                        </div>
+                        <hr>
+                        <button type="submit" title="Quiero registrarme." class="btn btn-primary">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="fixed-bottom bg-light" th:insert="~{fragmentos/pie.html::pie}"></footer>
+
+    <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+</body>
+
+</html>

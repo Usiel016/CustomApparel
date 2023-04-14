@@ -8,9 +8,14 @@ import org.springframework.data.domain.Pageable;
 
 public interface IntServiceCategorias {
 	public List<Categoria> obtenerCategorias();
+
+	public void agregarCategoria(Categoria categoria);
+
 	public Categoria buscarPorId(Integer idCategoria);
-	public void guardarCategoria(Categoria categoria);
+
 	public void eliminarPorId(Integer idCategoria);
-	public int contarCategorias();
+
+	public Integer contarCategorias();
+
 	public Page<Categoria> buscarTodas(Pageable page);
 }
